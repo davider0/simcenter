@@ -24,6 +24,7 @@ const handleSubmit = async (n) => {
     console.log("typeof data: " + typeof data);
     console.log("response status 200 (⌐■_■)");
     const parsedData = Array.from(data.bot);
+    console.log(parsedData);
     return parsedData;
 
   } else {

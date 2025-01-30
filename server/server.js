@@ -16,31 +16,29 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/", async (req, res) => {
-  try {
-    switch (req.body.phase) {
-      case 1:
-        {
-          console.log("hola soy el backend no se que coño hago con mi vida");
-          const resp = await fetch(
-            `https://live.trading212.com/api/v0/equity/metadata/exchanges`,
-            {
-              method: "GET",
-              headers: {
-                Authorization: apiKey,
-              },
-            }
-          );
-          await new Promise((resolve) => setTimeout(resolve, 5000));
-          res.status(200).send({
-            bot: resp,
-          });
-        }
-        break;
+  switch (req.body.phase) {
+    case 1: {
+      try {
+        console.log("hola soy el backend no se que coño hago con mi vida");
+        const resp = await fetch(
+          `https://live.trading212.com/api/v0/equity/metadata/exchanges`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: apiKey,
+            },
+          }
+        );
+        res.status(200).send({
+          bot: resp.json(),
+        });
+      } catch (error) {
+        console.log(error);
+        alert(error);
+        res.status(500).send({ error });
+      }
+      break;
     }
-  } catch (error) {
-    console.log(error);
-    alert(error);
-    res.status(500).send({ error });
   }
 });
 
