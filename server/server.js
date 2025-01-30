@@ -29,9 +29,11 @@ app.post("/", async (req, res) => {
             },
           }
         );
+        console.log("resp: "+resp);
         res.status(200).send({
           bot: resp.json(),
         });
+        console.log("resp JSON: "+resp.json());
       } catch (error) {
         console.log(error);
         alert(error);
