@@ -29,7 +29,6 @@ app.post("/", async (req, res) => {
             },
           }
         );
-        console.log("resp: " + JSON.stringify(resp.json()));
         res.status(200).send({
           bot: resp.json(),
         });
