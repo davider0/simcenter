@@ -2,7 +2,13 @@ import { useEffect, useState } from 'react';
 import '../App.css';
 import '../assets/fonts/ArialPixel.css';
 import '../assets/fonts/SpaceMono.css';
+import kvm from "../assets/IMG_4069.png";
+import KevinJames from "../assets/kvm.png";
 import Loader from './loader';
+
+
+
+
 var test = [
   {
     "ticker": "STN_US_EQ",
@@ -53,22 +59,34 @@ var test = [
     "addedOn": "2025-01-24T14:50:22.000+02:00"
   }];
 function App() {
-  const [data, setData] = useState([]);
+  const [data2, setData2] = useState([]);
 
   useEffect(() => {
-    const handleRequest = async (method = 'GET', ticker) => {
-      const response = await fetch(
-        `https://porex35.onrender.com`,
-        {
-          method: method,
-          headers: {
-            Authorization: '35762281ZovmnIuZgETxpJAeGMYusMTOeCjZj'
-          }
-        }
-      );
-      const result = await response.json();
-      setData(result);
-    };
+
+    const handleSubmit = async (n) => {
+      const response = await fetch('https://porrex35.onrender.com/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          phase: n
+        })
+      })
+    
+      if (response.ok) {
+        const data = await response.json();
+        console.log("response status 200 (⌐■_■)");
+        const parsedData = data;
+        setData2(parsedData);
+        return parsedData;
+    
+      } else {
+        const err = await response.text();
+        console.log(err);
+        alert(err);
+      }
+    }
 
 
   }, []);
@@ -122,7 +140,10 @@ function App() {
           <h3><strong>Órdenes (todas) | Dinero: 0 EUR</strong></h3>
           <br />
           <hr className='cs-hr' />
+          <img src={KevinJames} alt="Imagen de ejemplo" style={{ width: '550px', height: '350px', boxShadow: '2px 2px 5px #000' }} />
+          <img src={kvm} alt="Imagen de ejemplo" style={{ width: '350px', height: '350px', boxShadow: '2px 2px 5px #000' }} />
         </footer>
+
 
       </div>
     </div>

@@ -17,19 +17,24 @@ app.get("/", async (req, res) => {
 
 app.post("/", async (req, res) => {
   try {
-    const ticker = req.body.ticker;
-    let response;
-    if(ticker){
-      req.method = 'POST';
-      response = 
+    switch (req.body.phase) {
+      case 1:
+        {
+          const resp = await fetch(
+            `https://live.trading212.com/api/v0/equity/metadata/exchanges`,
+            {
+              method: "GET",
+              headers: {
+                Authorization: apiKey,
+              },
+            }
+          );
+          res.status(200).send({
+            bot: resp,
+          });
+        }
+        break;
     }
-
-    res.status(200).send({
-      bot: response.data.choices[0].message.content,
-    });
-
-    // Esperar antes de hacer la próxima solicitud
-    await delay(1000); // Espera 1 segundo
   } catch (error) {
     console.log(error);
     alert(error);
