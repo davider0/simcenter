@@ -8,15 +8,13 @@ import Loader from './loader';
 
 const handleSubmit = async (n) => {
   console.log("Hola soy JavaScript estoy intetando hacer un fetch");
-  const response = await fetch('https://porrex35.onrender.com/', {
+  const response = await fetch('https://cors-anywhere.herokuapp.com/https://porrex35.onrender.com/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      phase: n
-    })
-  })
+    body: JSON.stringify({ phase: n })
+  });
 
   if (response.ok) {
     const data = await response.json();
