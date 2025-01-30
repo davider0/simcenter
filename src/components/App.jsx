@@ -110,10 +110,9 @@ function App() {
 
         </section>
         <div style={{ color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-          <button className='cs-btn'>CARGAR</button>
-          <button className='cs-btn'>LISTA EXCHANGE</button>
-          <input className='cs-input'></input>
-          <button className='cs-btn'>BUSCAR TICKER</button>
+          <button className='cs-btn'>OBSERVAR</button>
+          <button className='cs-btn'>COMPRAR</button>
+          <button className='cs-btn'>QUITAR</button>
         </div>
       </main>
       <br />
