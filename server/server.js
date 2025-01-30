@@ -22,7 +22,7 @@ app.post("/", async (req, res) => {
         console.log("hola soy el backend no se que coño hago con mi vida");
         async function run() {
           const resp = await fetch(
-            `https://live.trading212.com/api/v0/equity/metadata/exchanges`,
+            `https://live.trading212.com/api/v0/equity/metadata/instruments`,
             {
               method: "GET",
               headers: {
