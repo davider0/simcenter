@@ -1,11 +1,15 @@
+import cors from "cors";
 import * as dotenv from "dotenv";
 import express from "express";
 
 dotenv.config();
 
 var apiKey = "35762281ZovmnIuZgETxpJAeGMYusMTOeCjZj";
-
+const corsOptions = {
+  origin: 'http://localhost:5173/',
+}
 const app = express();
+app.use(cors(corsOptions));
 app.use(express.json());
 app.get("/", async (req, res) => {
   res.status(200).send({
