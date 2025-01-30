@@ -1,19 +1,19 @@
 :root {
-  --bg: #6b8e23;
-  --secondary-bg: #556b2f;
-  --accent: #8fbc8f;
-  --secondary-accent: #6b8e23;
-  --text: #9acd32;
-  --secondary-text: #8fbc8f;
-  --text-3: #6b8e23;
-  --border-light: #556b2f;
-  --border-dark: #2e4d1b;
-  --disabled-text: #2e4d1b;
-  --disabled-text-shadow: #556b2f;
-  --outline: #2e4d1b;
-  --slider: #556b2f;
-  --slider-bg: #2e4d1b;
-  --scrollbar-track: #556b2f;
+  --bg: #556b2f;
+  --secondary-bg: #2e4d1b;
+  --accent: #6b8e23;
+  --secondary-accent: #556b2f;
+  --text: #6b8e23;
+  --secondary-text: #6b8e23;
+  --text-3: #556b2f;
+  --border-light: #2e4d1b;
+  --border-dark: #1a2b0f;
+  --disabled-text: #1a2b0f;
+  --disabled-text-shadow: #2e4d1b;
+  --outline: #1a2b0f;
+  --slider: #2e4d1b;
+  --slider-bg: #1a2b0f;
+  --scrollbar-track: #2e4d1b;
 }
 *,
 :after,

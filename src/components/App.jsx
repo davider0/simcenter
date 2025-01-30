@@ -2,13 +2,36 @@ import { useEffect, useState } from 'react';
 import '../App.css';
 import '../assets/fonts/ArialPixel.css';
 import '../assets/fonts/SpaceMono.css';
-import kvm from "../assets/IMG_4069.png";
-import KevinJames from "../assets/kvm.png";
 import Loader from './loader';
 
 
 
+const handleSubmit = async (n) => {
+  console.log("Hola soy JavaScript estoy intetando hacer un fetch");
+  const response = await fetch('https://porrex35.onrender.com/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      phase: n
+    })
+  })
 
+  if (response.ok) {
+    const data = await response.json();
+    console.log("data: " + JSON.stringify(data));
+    console.log("typeof data: " + typeof data);
+    console.log("response status 200 (⌐■_■)");
+    const parsedData = Array.from(data.bot);
+    return parsedData;
+
+  } else {
+    const err = await response.text();
+    console.log("Hola soy JavaScript y me he equivocado no como el programador que nunca se equivoca: " + err);
+    alert(err);
+  }
+}
 var test = [
   {
     "ticker": "STN_US_EQ",
@@ -63,30 +86,7 @@ function App() {
 
   useEffect(() => {
 
-    const handleSubmit = async (n) => {
-      const response = await fetch('https://porrex35.onrender.com/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          phase: n
-        })
-      })
-    
-      if (response.ok) {
-        const data = await response.json();
-        console.log("response status 200 (⌐■_■)");
-        const parsedData = data;
-        setData2(parsedData);
-        return parsedData;
-    
-      } else {
-        const err = await response.text();
-        console.log(err);
-        alert(err);
-      }
-    }
+
 
 
   }, []);
@@ -107,14 +107,17 @@ function App() {
         `}
       </style>
       <div style={{ color: 'white' }}>
-        <button className='cs-btn'>CARGAR</button>
+        <button className='cs-btn' onClick={async () => {
+          let res = await handleSubmit(1);
+          setData2(res);
+        }}>CARGAR</button>
         <button className='cs-btn'>LISTA EXCHANGE</button>
         <input className='cs-input'></input>
         <button className='cs-btn'>BUSCAR TICKER</button>
       </div>
       <main className="main-content" style={{ display: 'flex' }}>
         <section className="left-column" style={{ flex: '1', marginRight: '20px', padding: '10px', borderRadius: '0px', boxShadow: 'inset 2px 2px 5px #000', color: '#500000', maxHeight: '500px', overflowY: 'auto', fontFamily: 'Space Mono, monospace' }}>
-          <Loader arrayJsons={test} />
+          <Loader arrayJsons={data2} />
         </section>
         <section className="right-column" style={{ flex: '2', padding: '10px', background: '#f5f5f5', borderRadius: '0px', boxShadow: 'inset 2px 2px 5px #000', color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite', backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', backgroundSize: '200% auto' }}>
 
@@ -140,11 +143,7 @@ function App() {
           <h3><strong>Órdenes (todas) | Dinero: 0 EUR</strong></h3>
           <br />
           <hr className='cs-hr' />
-          <img src={KevinJames} alt="Imagen de ejemplo" style={{ width: '550px', height: '350px', boxShadow: '2px 2px 5px #000' }} />
-          <img src={kvm} alt="Imagen de ejemplo" style={{ width: '350px', height: '350px', boxShadow: '2px 2px 5px #000' }} />
         </footer>
-
-
       </div>
     </div>
   );

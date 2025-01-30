@@ -20,6 +20,7 @@ app.post("/", async (req, res) => {
     switch (req.body.phase) {
       case 1:
         {
+          console.log("hola soy el backend no se que coño hago con mi vida");
           const resp = await fetch(
             `https://live.trading212.com/api/v0/equity/metadata/exchanges`,
             {
@@ -29,6 +30,7 @@ app.post("/", async (req, res) => {
               },
             }
           );
+          await new Promise((resolve) => setTimeout(resolve, 5000));
           res.status(200).send({
             bot: resp,
           });
