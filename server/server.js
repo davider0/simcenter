@@ -31,7 +31,7 @@ app.post("/", async (req, res) => {
 
           const data = await resp.text();
           res.status(200).send({
-            bot: data.json(),
+            bot: data,
           });
         }
         run();
