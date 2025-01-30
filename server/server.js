@@ -20,18 +20,23 @@ app.post("/", async (req, res) => {
     case 1: {
       try {
         console.log("hola soy el backend no se que coño hago con mi vida");
-        const resp = await fetch(
-          `https://live.trading212.com/api/v0/equity/metadata/exchanges`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: apiKey,
-            },
-          }
-        );
-        res.status(200).send({
-          bot: resp.json(),
-        });
+        async function run() {
+          const resp = await fetch(
+            `https://live.trading212.com/api/v0/equity/metadata/exchanges`,
+            {
+              method: "GET",
+              headers: {
+                Authorization: "35762281ZovmnIuZgETxpJAeGMYusMTOeCjZj",
+              },
+            }
+          );
+
+          const data = await resp.text();
+          res.status(200).send({
+            bot: data.json(),
+          });
+        }
+        run();
       } catch (error) {
         console.log(error);
         alert(error);
