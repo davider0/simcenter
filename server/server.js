@@ -1,13 +1,10 @@
 import cors from "cors";
 import * as dotenv from "dotenv";
 import express from "express";
-import { Configuration } from "openai";
 
 dotenv.config();
 
-const configuration = new Configuration({
-  apiKey: "35762281ZovmnIuZgETxpJAeGMYusMTOeCjZj",
-});
+var apiKey = "35762281ZovmnIuZgETxpJAeGMYusMTOeCjZj";
 
 const app = express();
 app.use(cors());
@@ -20,16 +17,12 @@ app.get("/", async (req, res) => {
 
 app.post("/", async (req, res) => {
   try {
-    const prompt = req.body.prompt;
-    const response = await fetch(
-      `/trading212/api/v0/equity/metadata/instruments`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: "35762281ZovmnIuZgETxpJAeGMYusMTOeCjZj",
-        },
-      }
-    );
+    const ticker = req.body.ticker;
+    let response;
+    if(ticker){
+      req.method = 'POST';
+      response = 
+    }
 
     res.status(200).send({
       bot: response.data.choices[0].message.content,

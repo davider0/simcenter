@@ -1,8 +1,5 @@
-
 import PropTypes from 'prop-types';
-
-import Button from '@mui/material/Button';
-
+import '../App.css'; // Asegúrate de que el CSS esté importado
 
 const Loader = ({ arrayJsons }) => {
     return (
@@ -17,13 +14,16 @@ const Loader = ({ arrayJsons }) => {
                     <p style={{ margin: '0' }}>Cantidad mínima de comercio: {item.minTradeQuantity}</p>
                     <p style={{ margin: '0' }}>Cantidad máxima abierta: {item.maxOpenQuantity}</p>
                     <p style={{ margin: '0' }}>Añadido el: {new Date(item.addedOn).toLocaleDateString()}</p>
-                    <Button variant="outlined">AÑADIR</Button>
+                    <button className="cs-btn">AÑADIR</button>
+                    <input className='cs-input' style={{ color: 'white' }}></input>
                 </div>
             ))}
         </div>
     );
 }
+
 Loader.propTypes = {
     arrayJsons: PropTypes.array.isRequired,
 };
+
 export default Loader;
