@@ -108,9 +108,9 @@ function App() {
           let res = await handleSubmit(1);
           setData2(res);
         }}>CARGAR</button>
-        <button className='cs-btn'>LISTA EXCHANGE</button>
-        <input className='cs-input'></input>
-        <button className='cs-btn'>BUSCAR TICKER</button>
+        <button className='cs-btn' onClick={() => {
+          setData2([]);
+        }}>LIMPIAR</button>
       </div>
       <main className="main-content" style={{ display: 'flex' }}>
         <section className="left-column" style={{ flex: '1', marginRight: '20px', padding: '10px', borderRadius: '0px', boxShadow: 'inset 2px 2px 5px #000', color: '#500000', maxHeight: '500px', overflowY: 'auto', fontFamily: 'Space Mono, monospace' }}>
@@ -122,17 +122,31 @@ function App() {
             <h3 style={{ color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite', backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', backgroundSize: '200% auto' }}><strong>Bienvenido a Porrex 35</strong></h3>
             <p style={{ color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite', backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', backgroundSize: '200% auto' }}>Automatiza la compra y venta de acciones del mercado del primer mundo.<br />Mete en la lista de observación una sociedad para empezar.
             </p>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <p style={{ color: "white", fontFamily: 'CustomFont' }}><br /> <br />
+                <div className="cs-tooltip">
+                  Orden de compra:
+                  <span
+                    style={{ bottom: "100%", width: "100px", left: "50%", marginLeft: "-50px" }}
+                    className="text">Introduce el Ticker, caso sensitivo </span>
+
+                </div>
+                <input className="cs-input"></input><button className='cs-btn'>HACER ORDEN DE COMPRA</button>
+              </p>
+
+            </div>
+
           </div>
 
 
 
-        </section>
+        </section >
         <div style={{ color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
           <button className='cs-btn'>OBSERVAR</button>
           <button className='cs-btn'>COMPRAR</button>
           <button className='cs-btn'>QUITAR</button>
         </div>
-      </main>
+      </main >
       <br />
       <hr className='cs-hr' />
       <div>
@@ -142,7 +156,7 @@ function App() {
           <hr className='cs-hr' />
         </footer>
       </div>
-    </div>
+    </div >
   );
 }
 

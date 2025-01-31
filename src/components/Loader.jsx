@@ -15,7 +15,6 @@ const Loader = ({ arrayJsons }) => {
                     <p style={{ margin: '0' }}>Cantidad máxima abierta: {item.maxOpenQuantity}</p>
                     <p style={{ margin: '0' }}>Añadido el: {new Date(item.addedOn).toLocaleDateString()}</p>
                     <button className="cs-btn">AÑADIR</button>
-                    <input className='cs-input' style={{ color: 'white' }}></input>
                 </div>
             ))}
         </div>
