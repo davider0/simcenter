@@ -18,11 +18,9 @@ const handleSubmit = async (n) => {
 
   if (response.ok) {
     const data = await response.json();
-    console.log("data: " + JSON.stringify(data));
-    console.log("typeof data: " + typeof data);
-    console.log("response status 200 (⌐■_■)");
-    const parsedData = Array.from(data.bot);
-    console.log(parsedData);
+
+    const parsedData = eval(data.bot);
+
     return parsedData;
 
   } else {
