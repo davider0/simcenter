@@ -44,6 +44,11 @@ app.post("/", async (req, res) => {
       }
       break;
     }
+
+    case 2: {
+      
+      break;
+    }
   }
 });
 

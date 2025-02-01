@@ -1,9 +1,52 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import '../App.css';
 import '../assets/fonts/ArialPixel.css';
 import '../assets/fonts/SpaceMono.css';
+import DialogConsole from './DialogConsole';
 import Loader from './loader';
+import OrderCard from './OrderCard';
 
+
+var orderDefault = [{
+  "creationTime": "2019-08-24T14:15:22Z",
+  "filledQuantity": 0,
+  "filledValue": 0,
+  "id": 0,
+  "limitPrice": 0,
+  "quantity": 0,
+  "status": "LOCAL",
+  "stopPrice": 0,
+  "strategy": "QUANTITY",
+  "ticker": "AAPL_US_EQ",
+  "type": "LIMIT",
+  "value": 0
+}, {
+  "creationTime": "2019-08-24T14:15:22Z",
+  "filledQuantity": 0,
+  "filledValue": 0,
+  "id": 12,
+  "limitPrice": 0,
+  "quantity": 0,
+  "status": "LOCAL",
+  "stopPrice": 0,
+  "strategy": "QUANTITY",
+  "ticker": "NTND_US",
+  "type": "LIMIT",
+  "value": 0
+}, {
+  "creationTime": "2019-08-24T14:15:22Z",
+  "filledQuantity": 0,
+  "filledValue": 0,
+  "id": 0,
+  "limitPrice": 0,
+  "quantity": 0,
+  "status": "LOCAL",
+  "stopPrice": 0,
+  "strategy": "QUANTITY",
+  "ticker": "META_US",
+  "type": "LIMIT",
+  "value": 0
+}];
 
 
 const handleSubmit = async (n) => {
@@ -25,74 +68,21 @@ const handleSubmit = async (n) => {
 
   } else {
     const err = await response.text();
-    console.log("Hola soy JavaScript y me he equivocado no como el programador que nunca se equivoca: " + err);
+
     alert(err);
   }
 }
-var test = [
-  {
-    "ticker": "STN_US_EQ",
-    "type": "STOCK",
-    "workingScheduleId": 56,
-    "isin": "CA85472N1096",
-    "currencyCode": "USD",
-    "name": "Stantec",
-    "shortName": "STN",
-    "minTradeQuantity": 0.02,
-    "maxOpenQuantity": 5804,
-    "addedOn": "2023-11-02T16:28:13.000+02:00"
-  },
-  {
-    "ticker": "ZGYd_EQ",
-    "type": "STOCK",
-    "workingScheduleId": 171,
-    "isin": "US31620M1062",
-    "currencyCode": "EUR",
-    "name": "Fidelity National Information Services",
-    "shortName": "ZGY",
-    "minTradeQuantity": 1,
-    "maxOpenQuantity": 40,
-    "addedOn": "2025-01-24T14:50:22.000+02:00"
-  },
-  {
-    "ticker": "ZGYd_EQ",
-    "type": "STOCK",
-    "workingScheduleId": 171,
-    "isin": "US31620M1062",
-    "currencyCode": "EUR",
-    "name": "Fidelity National Information Services",
-    "shortName": "ZGY",
-    "minTradeQuantity": 1,
-    "maxOpenQuantity": 40,
-    "addedOn": "2025-01-24T14:50:22.000+02:00"
-  },
-  {
-    "ticker": "ZGYd_EQ",
-    "type": "STOCK",
-    "workingScheduleId": 171,
-    "isin": "US31620M1062",
-    "currencyCode": "EUR",
-    "name": "Fidelity National Information Services",
-    "shortName": "ZGY",
-    "minTradeQuantity": 1,
-    "maxOpenQuantity": 40,
-    "addedOn": "2025-01-24T14:50:22.000+02:00"
-  }];
+
 function App() {
   const [data2, setData2] = useState([]);
 
-  useEffect(() => {
 
-
-
-
-  }, []);
 
   return (
 
     <div className="trading212" style={{ fontFamily: 'CustomFont', padding: '20px', borderRadius: '10px', boxShadow: '5px 5px 15px #000', color: '#000' }}>
       <header className="header" style={{ marginBottom: '20px', padding: '10px', borderRadius: '0px', boxShadow: 'inset 2px 2px 5px #000', color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite' }}>
-        <h1 style={{ backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', animation: 'rainbow 3s linear infinite', backgroundSize: '200% auto', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent', fontFamily: 'Space Mono, monospace' }}><strong>Porrex 35</strong></h1>
+        <h1 style={{ backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', animation: 'rainbow 3s linear infinite', backgroundSize: '200% auto', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent', fontFamily: 'Space Mono, monospace' }}><strong>Porrex 35 | Dinero: -10.85 EUR</strong></h1>
       </header>
       <style>
         {`
@@ -123,37 +113,47 @@ function App() {
             <p style={{ color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite', backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', backgroundSize: '200% auto' }}>Automatiza la compra y venta de acciones del mercado del primer mundo.<br />Mete en la lista de observación una sociedad para empezar.
             </p>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
-              <p style={{ color: "white", fontFamily: 'CustomFont' }}><br /> <br />
+              <p style={{ color: "white", fontFamily: 'CustomFont' }}><br />
                 <div className="cs-tooltip">
-                  Orden de compra:
+                  Ticker:
                   <span
                     style={{ bottom: "100%", width: "100px", left: "50%", marginLeft: "-50px" }}
                     className="text">Introduce el Ticker, caso sensitivo </span>
 
                 </div>
-                <input className="cs-input"></input><button className='cs-btn'>HACER ORDEN DE COMPRA</button>
+                <input className="cs-input"></input><button className='cs-btn'>OBSERVAR</button>
+                <div className="cs-checkbox">
+                  <input id="checkbox" type="checkbox" />
+                  <label className="cs-checkbox__label" htmlFor="checkbox">Automatizar</label>
+                </div>
+
               </p>
 
             </div>
 
           </div>
+          <section className="right-column" style={{ flex: '1', padding: '10px', background: '#f5f5f5', borderRadius: '0px', boxShadow: 'inset 2px 2px 5px #000', color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite', backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', backgroundSize: '200% auto', height: '270px', overflowY: 'auto' }}>
 
+
+
+          </section>
 
 
         </section >
-        <div style={{ color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-          <button className='cs-btn'>OBSERVAR</button>
-          <button className='cs-btn'>COMPRAR</button>
-          <button className='cs-btn'>QUITAR</button>
-        </div>
+        <section className="right-column" style={{ flex: '3', marginLeft: '20px', padding: '10px', borderRadius: '0px', boxShadow: 'inset 2px 2px 5px #000', color: '#500000', maxHeight: '500px', overflowY: 'auto', fontFamily: 'Space Mono, monospace', maxWidth: '300px' }}>
+          <DialogConsole text="API lista"></DialogConsole>
+        </section>
+
       </main >
       <br />
       <hr className='cs-hr' />
       <div>
-        <footer className="footer" style={{ marginTop: '20px', padding: '10px', background: '#f5f5f5', borderRadius: '0px', boxShadow: 'inset 2px 2px 5px #000', color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite', backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', backgroundSize: '200% auto', fontFamily: 'Space Mono, monospace' }}>
-          <h3><strong>Órdenes (todas) | Dinero: 0 EUR</strong></h3>
+        <footer className="footer" style={{ marginTop: '20px', padding: '10px', background: '#f5f5f5', borderRadius: '0px', boxShadow: 'inset 2px 2px 5px #000', color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite', backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', backgroundSize: '200% auto', fontFamily: 'CustomFont' }}>
+          <h3 style={{ fontFamily: 'Space Mono, monospace' }}><strong>Órdenes (todas) | Dinero: 0 EUR</strong></h3>
           <br />
           <hr className='cs-hr' />
+          <br />
+          <button className='cs-btn'>RECARGAR ORDENES</button><OrderCard jsonMeta={orderDefault} />
         </footer>
       </div>
     </div >
