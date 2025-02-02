@@ -2,6 +2,7 @@ import { useState } from 'react';
 import '../App.css';
 import '../assets/fonts/ArialPixel.css';
 import '../assets/fonts/SpaceMono.css';
+import kvm from '../assets/kvm.png';
 import DialogConsole from './DialogConsole';
 import Loader from './loader';
 import OrderCard from './OrderCard';
@@ -62,7 +63,8 @@ const handleSubmit = async (n) => {
   if (response.ok) {
     const data = await response.json();
 
-    const parsedData = eval(data.bot);
+    const parsedData = n == 1 ? eval(data.bot) : data.bot;
+    console.log(parsedData);
 
     return parsedData;
 
@@ -75,14 +77,27 @@ const handleSubmit = async (n) => {
 
 function App() {
   const [data2, setData2] = useState([]);
- const [cash, setCash] = useState("");
-  setCash()
+  const [cash, setCash] = useState("");
+  const [cashFree, setCashFree] = useState("");
 
   return (
 
     <div className="trading212" style={{ fontFamily: 'CustomFont', padding: '20px', borderRadius: '10px', boxShadow: '5px 5px 15px #000', color: '#000' }}>
       <header className="header" style={{ marginBottom: '20px', padding: '10px', borderRadius: '0px', boxShadow: 'inset 2px 2px 5px #000', color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite' }}>
-        <h1 style={{ backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', animation: 'rainbow 3s linear infinite', backgroundSize: '200% auto', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent', fontFamily: 'Space Mono, monospace' }}><strong>Porrex 35 | Dinero: -10.85 EUR</strong></h1>
+        <h1 style={{ backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', animation: 'rainbow 3s linear infinite', backgroundSize: '200% auto', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent', fontFamily: 'Space Mono, monospace' }}><strong>Porrex 35 | Dinero: {cash || cashFree}</strong> &emsp;
+          <button className='cs-btn' onClick={async () => {
+            setCashFree(null);
+            let c = await handleSubmit(2);
+            setCash("" + (JSON.parse(c)["total"]));
+          }}>↻</button>
+          <button className='cs-btn' onClick={async () => {
+            setCash(null);
+            let c = await handleSubmit(2);
+            setCash("" + (JSON.parse(c)["free"]));
+          }}><img src={kvm} alt="Descripción de la imagen" style={{ width: '20px', height: '20px' }} /></button>
+
+
+        </h1>
       </header>
       <style>
         {`
@@ -139,16 +154,24 @@ function App() {
       </main >
       <br />
       <hr className='cs-hr' />
-      <div>
-        <footer className="footer" style={{ marginTop: '20px', padding: '10px', background: '#f5f5f5', borderRadius: '0px', boxShadow: 'inset 2px 2px 5px #000', color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite', backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', backgroundSize: '200% auto', fontFamily: 'CustomFont' }}>
-          <h3 style={{ fontFamily: 'Space Mono, monospace' }}><strong>Órdenes (todas) | Dinero: 0 EUR</strong></h3>
+      <div style={{ display: 'flex' }}>
+        <footer className="footer" style={{ flex: '1', marginTop: '20px', padding: '10px', background: '#f5f5f5', borderRadius: '0px', boxShadow: 'inset 2px 2px 5px #000', color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite', backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', backgroundSize: '200% auto', fontFamily: 'CustomFont' }}>
+          <h3 style={{ fontFamily: 'Space Mono, monospace' }}><strong>Órdenes de compra</strong></h3>
           <br />
           <hr className='cs-hr' />
           <br />
           <button className='cs-btn'>RECARGAR ORDENES</button><OrderCard jsonMeta={orderDefault} />
         </footer>
+        <footer className="rightColumn" style={{ flex: '2', marginTop: '20px', marginLeft: '60px', padding: '10px', background: '#f5f5f5', borderRadius: '0px', boxShadow: 'inset 2px 2px 5px #000', color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite', backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', backgroundSize: '200% auto', fontFamily: 'Space Mono, monospace', width: 'auto', overflowY: 'auto', overflowX: 'auto' }}>
+          <h3><strong>Órdenes de venta</strong></h3>
+          <br />
+          <hr className='cs-hr' />
+          <br />
+
+        </footer>
+
       </div>
-    </div >
+    </div>
   );
 }
 

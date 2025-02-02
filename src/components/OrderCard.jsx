@@ -35,8 +35,9 @@ const OrderCard = ({ jsonMeta }) => {
                                     <button className='cs-btn' disabled>VENDER</button>
                                 </div>
                                 <button className='cs-btn'>QUITAR</button>
-                                <div className='console' style={{ padding: '10px', background: '#393c31', borderRadius: '0px', boxShadow: 'inset 2px 2px 5px #000', color: 'red', height: '100px', width: '300px', overflowY: 'scroll' }}>
+                                <div className='console' style={{ padding: '10px', background: '#393c31', borderRadius: '0px', boxShadow: 'inset 2px 2px 5px #000', color: 'red', height: 'auto', width: '300px', overflowY: 'scroll' }}>
                                     <p>
+
                                     </p>
                                 </div>
                             </div>
