@@ -75,8 +75,8 @@ const handleSubmit = async (n) => {
 
 function App() {
   const [data2, setData2] = useState([]);
-
-
+ const [cash, setCash] = useState("");
+  setCash()
 
   return (
 
@@ -126,19 +126,11 @@ function App() {
                   <input id="checkbox" type="checkbox" />
                   <label className="cs-checkbox__label" htmlFor="checkbox">Automatizar</label>
                 </div>
-
               </p>
-
             </div>
-
           </div>
           <section className="right-column" style={{ flex: '1', padding: '10px', background: '#f5f5f5', borderRadius: '0px', boxShadow: 'inset 2px 2px 5px #000', color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite', backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', backgroundSize: '200% auto', height: '270px', overflowY: 'auto' }}>
-
-
-
           </section>
-
-
         </section >
         <section className="right-column" style={{ flex: '3', marginLeft: '20px', padding: '10px', borderRadius: '0px', boxShadow: 'inset 2px 2px 5px #000', color: '#500000', maxHeight: '500px', overflowY: 'auto', fontFamily: 'Space Mono, monospace', maxWidth: '300px' }}>
           <DialogConsole text="API lista"></DialogConsole>

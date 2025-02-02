@@ -46,7 +46,31 @@ app.post("/", async (req, res) => {
     }
 
     case 2: {
-      
+      try {
+        console.log("hola soy el backend no se que coño hago con mi vida");
+        async function run() {
+          const resp = await fetch(
+            `https://live.trading212.com/api/v0/equity/account/cash`,
+            {
+              method: 'GET',
+              headers: {
+                Authorization: apiKey,
+              }
+            }
+          
+          );
+
+          const data = await resp.text();
+          res.status(200).send({
+            bot: data,
+          });
+        }
+        run();
+      } catch (error) {
+        console.log(error);
+        alert(error);
+        res.status(500).send({ error });
+      }
       break;
     }
   }
