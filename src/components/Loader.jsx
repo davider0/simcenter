@@ -5,16 +5,16 @@ const Loader = ({ arrayJsons }) => {
     return (
         <div>
             {arrayJsons.map((item, index) => (
-                <div key={index} style={{ marginBottom: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '5px' }}>
-                    <h2 style={{ margin: '0 0 5px 0' }}>{item.name} ({item.shortName})</h2>
-                    <p style={{ margin: '0' }}>Ticker: {item.ticker}</p>
-                    <p style={{ margin: '0' }}>Tipo: {item.type}</p>
-                    <p style={{ margin: '0' }}>ISIN: {item.isin}</p>
-                    <p style={{ margin: '0' }}>Moneda: {item.currencyCode}</p>
-                    <p style={{ margin: '0' }}>Cantidad mínima de comercio: {item.minTradeQuantity}</p>
-                    <p style={{ margin: '0' }}>Cantidad máxima abierta: {item.maxOpenQuantity}</p>
-                    <p style={{ margin: '0' }}>Añadido el: {new Date(item.addedOn).toLocaleDateString()}</p>
-                    <button className="cs-btn">AÑADIR</button>
+                <div key={index} style={{ marginBottom: '10px', marginTop: '15px', padding: '20px', border: '4px solid #000', borderRadius: '0', backgroundColor: '#fff', boxShadow: '10px 10px 0 #000' }}>
+                    <h2 style={{ margin: '0 0 5px 0', fontFamily: 'Space Mono, monospace', fontWeight: 'bold', color: '#000' }}>{item.name} ({item.shortName})</h2>
+                    <p style={{ margin: '0', fontFamily: 'Space Mono, monospace', color: '#000' }}>Ticker: {item.ticker}</p>
+                    <p style={{ margin: '0', fontFamily: 'Space Mono, monospace', color: '#000' }}>Tipo: {item.type}</p>
+                    <p style={{ margin: '0', fontFamily: 'Space Mono, monospace', color: '#000' }}>ISIN: {item.isin}</p>
+                    <p style={{ margin: '0', fontFamily: 'Space Mono, monospace', color: '#000' }}>Moneda: {item.currencyCode}</p>
+                    <p style={{ margin: '0', fontFamily: 'Space Mono, monospace', color: '#000' }}>Cantidad mínima de comercio: {item.minTradeQuantity}</p>
+                    <p style={{ margin: '0', fontFamily: 'Space Mono, monospace', color: '#000' }}>Cantidad máxima abierta: {item.maxOpenQuantity}</p>
+                    <p style={{ margin: '0', fontFamily: 'Space Mono, monospace', color: '#000' }}>Añadido el: {new Date(item.addedOn).toLocaleDateString()}</p>
+                    <button className="cs-btn" >AÑADIR</button>
                 </div>
             ))}
         </div>
