@@ -5,7 +5,19 @@ const DialogConsole = ({ initialText }) => {
     const [text, setText] = useState(initialText);
 
     return (
-        <div className='console' style={{ padding: '10px', background: '#393c31', borderRadius: '0px', boxShadow: 'inset 2px 2px 5px #000', color: 'green', height: '60vh', width: 'auto', overflowY: 'scroll' }}>
+        <div className='console' style={{ 
+            padding: '20px', 
+            background: '#f2f2f2', 
+            border: '3px solid #000', 
+            color: '#000', 
+            height: '100%', 
+            width: 'auto', 
+            overflowY: 'scroll', 
+            fontFamily: 'Courier New, monospace', 
+            fontSize: '14px', 
+            textTransform: 'uppercase',
+            boxShadow: 'none'
+        }}>
             <p>
                 {"\n" + text}
             </p>
@@ -19,7 +31,7 @@ DialogConsole.addText = (setText, texto = "") => {
 };
 
 DialogConsole.propTypes = {
-    initialText: PropTypes.array.isRequired,
+    initialText: PropTypes.any.isRequired,
 };
 
 export default DialogConsole;

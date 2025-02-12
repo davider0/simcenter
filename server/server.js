@@ -1,10 +1,12 @@
 import cors from "cors";
 import * as dotenv from "dotenv";
 import express from "express";
+import request from "request";
 
 dotenv.config();
 
-var apiKey = "35762281ZovmnIuZgETxpJAeGMYusMTOeCjZj";
+let apiKeyTrading = "35762281ZovmnIuZgETxpJAeGMYusMTOeCjZj";
+let apiKeyAlphaVenture = "K9XDG449WV87CB31";
 
 const app = express();
 app.use(cors());
@@ -26,7 +28,7 @@ app.post("/", async (req, res) => {
             {
               method: "GET",
               headers: {
-                Authorization: apiKey,
+                Authorization: apiKeyTrading,
               },
             }
           );
@@ -56,7 +58,7 @@ app.post("/", async (req, res) => {
             {
               method: "GET",
               headers: {
-                Authorization: apiKey,
+                Authorization: apiKeyTrading,
               },
             }
           );
@@ -86,7 +88,7 @@ app.post("/", async (req, res) => {
             {
               method: "GET",
               headers: {
-                Authorization: apiKey,
+                Authorization: apiKeyTrading,
               },
             }
           );
@@ -117,7 +119,7 @@ app.post("/", async (req, res) => {
             {
               method: "GET",
               headers: {
-                Authorization: apiKey,
+                Authorization: apiKeyTrading,
               },
             }
           );
@@ -148,7 +150,7 @@ app.post("/", async (req, res) => {
             {
               method: "CANCEL",
               headers: {
-                Authorization: apiKey,
+                Authorization: apiKeyTrading,
               },
             }
           );
@@ -179,7 +181,7 @@ app.post("/", async (req, res) => {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                Authorization: apiKey,
+                Authorization: apiKeyTrading,
               },
               body: JSON.stringify({
                 quantity: req.body.quantity,
@@ -212,7 +214,7 @@ app.post("/", async (req, res) => {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                Authorization: apiKey,
+                Authorization: apiKeyTrading,
               },
               body: JSON.stringify({
                 quantity: req.body.quantity,
@@ -234,6 +236,30 @@ app.post("/", async (req, res) => {
         alert(error);
         res.status(500).send({ error });
       }
+
+      break;
+    }
+
+    case 8: {
+      var url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${req.body.tickerAV}&interval=${req.body.interval}&apikey=${apiKeyAlphaVenture}`;
+      request.get(
+        {
+          url: url,
+          json: true,
+          headers: { "User-Agent": "request" },
+        },
+        (err, res, data) => {
+          if (err) {
+            console.log("Error:", err);
+          } else if (res.statusCode !== 200) {
+            console.log("Status:", res.statusCode);
+          } else {
+            res.status(200).send({
+              bot: data,
+            });
+          }
+        }
+      );
 
       break;
     }
