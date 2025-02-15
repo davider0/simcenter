@@ -14,7 +14,10 @@ const Loader = ({ arrayJsons }) => {
                     <p style={{ margin: '0', fontFamily: 'Space Mono, monospace', color: '#000' }}>Cantidad mínima de comercio: {item.minTradeQuantity}</p>
                     <p style={{ margin: '0', fontFamily: 'Space Mono, monospace', color: '#000' }}>Cantidad máxima abierta: {item.maxOpenQuantity}</p>
                     <p style={{ margin: '0', fontFamily: 'Space Mono, monospace', color: '#000' }}>Añadido el: {new Date(item.addedOn).toLocaleDateString()}</p>
-                    <button className="cs-btn" >AÑADIR</button>
+                    <div style={{display: 'flex'}}>
+                        <button className="cs-btn" >&#x21B5;</button>
+                        <input className="cs-input"></input>
+                    </div>
                 </div>
             ))}
         </div>
