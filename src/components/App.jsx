@@ -3,6 +3,7 @@ import '../App.css';
 import '../assets/fonts/ArialPixel.css';
 import '../assets/fonts/SpaceMono.css';
 import kvm from '../assets/kvm.png';
+import { useFetchStore } from '../zustand/fetchToAPI';
 import DialogConsole from './DialogConsole';
 import Headlines from './Headlines';
 import Loader from './loader';
@@ -49,40 +50,19 @@ var orderDefault = [{
   "value": 0
 }];
 
-
-const handleSubmit = async (n) => {
-  console.log("Hola soy JavaScript estoy intetando hacer un fetch");
-  const response = await fetch('https://porrex35.onrender.com/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ phase: n })
-  });
-
-  if (response.ok) {
-    const data = await response.json();
-
-    const parsedData = n == 1 || n == 3 ? eval(data.bot) : data.bot;
-    console.log(parsedData);
-
-    return parsedData;
-
-  } else {
-    const err = await response.text();
-
-    alert(err);
-  }
-}
-
 function App() {
   const [data2, setData2] = useState([]);
   const [cash, setCash] = useState("");
   const [cashFree, setCashFree] = useState("");
   const [dataOrders, setDataOrders] = useState([]);
 
-  return (
+  const handleSubmit = async (n) => {
+    const fetchStore = useFetchStore();
+    fetchStore.numberPetition = n;
+    return fetchStore;
+  };
 
+  return (
     <div className="trading212" style={{ fontFamily: 'Space Mono, monospace', padding: '20px', borderRadius: '10px', outline: '4px solid #000', color: '#000' }}>
       <header className="header" style={{ marginBottom: '20px', padding: '10px', borderRadius: '0px', outline: '4px solid #000', color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite' }}>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
