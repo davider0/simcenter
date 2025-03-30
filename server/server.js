@@ -268,7 +268,7 @@ app.post("/", async (req, res) => {
      
       request.get(
         {
-          url:  `https://string-db.org/api/highres_image/network?identifiers=${req.body.identifiers}&species=Embryophyta&`,
+          url:  `https://string-db.org/api/highres_image/network?identifiers=${req.body.identifiers}&species=Embryophyta`,
           json: true,
           headers: { "User-Agent": "request" },
         },
