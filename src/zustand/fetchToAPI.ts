@@ -2,12 +2,12 @@ import { create } from "zustand";
 
 interface State {
   JSONResponse: object | Array<any>;
-  fetchToAPI: (n: number) => Promise<any>;
+  fetchToAPI: (n: number, additionalBody: object) => Promise<any>;
 }
 
 export const useFetchStore = create<State>((set, get) => ({
   JSONResponse: {},
-  fetchToAPI: async (n: number) => {
+  fetchToAPI: async (n: number, additionalBody: object) => { // Added additionalBody parameter
     console.log("Hola soy JavaScript estoy intentando hacer un fetch");
     try {
       const response = await fetch("https://porrex35.onrender.com/", {
@@ -15,9 +15,9 @@ export const useFetchStore = create<State>((set, get) => ({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ phase: n }),
+        body: JSON.stringify({ phase: n, ...additionalBody }), // Used spread operator to include additionalBody
       });
-
+  
       if (response.ok) {
         const data = await response.json();
         const parsedData = n === 1 || n === 3 ? eval(data.bot) : data.bot;
