@@ -267,7 +267,7 @@ app.post("/", async (req, res) => {
     case 9: {
       request.get(
         {
-          url: `https://version-12-0.string-db.org/api/svg/network?identifiers=${req.body.identifiers}&species=Embryophyta`,
+          url: `https://version-12-0.string-db.org/api/svg/network?identifiers=${req.body.identifiers}?species=${req.body.species}?caller_identity=${req.body.caller_identity}?network_flavor=${req.body.network_flavor}?add_white_node=${req.body.add_white_node}`,
           json: true,
           headers: { "User-Agent": "request" },
         },
