@@ -276,6 +276,7 @@ app.post("/", async (req, res) => {
             console.log("Error:", err);
           } else if (res.statusCode !== 200) {
             console.log("Status:", res.statusCode);
+            console.log(res);
           } else {
             res.status(200).send({
               bot: data,
