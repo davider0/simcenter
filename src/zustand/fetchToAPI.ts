@@ -7,8 +7,10 @@ interface State {
 
 export const useFetchStore = create<State>((set, get) => ({
   JSONResponse: {},
-  fetchToAPI: async (n: number, additionalBody: object) => { // Added additionalBody parameter
+  fetchToAPI: async (n: number, additionalBody: object) => {
+    // Added additionalBody parameter
     console.log("Hola soy JavaScript estoy intentando hacer un fetch");
+    console.log({ phase: n, ...additionalBody });
     try {
       const response = await fetch("https://porrex35.onrender.com/", {
         method: "POST",
@@ -17,7 +19,7 @@ export const useFetchStore = create<State>((set, get) => ({
         },
         body: JSON.stringify({ phase: n, ...additionalBody }), // Used spread operator to include additionalBody
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         const parsedData = n === 1 || n === 3 ? eval(data.bot) : data.bot;

@@ -2,10 +2,10 @@ import cors from "cors";
 import * as dotenv from "dotenv";
 import express from "express";
 import request from "request";
-
+import TRADING from "../.env";
 dotenv.config();
 
-let apiKeyTrading = "35762281ZovmnIuZgETxpJAeGMYusMTOeCjZj";
+let apiKeyTrading = TRADING;
 let apiKeyAlphaVenture = "K9XDG449WV87CB31";
 
 const app = express();

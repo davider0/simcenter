@@ -55,12 +55,12 @@ function App() {
   const [cash, setCash] = useState("");
   const [cashFree, setCashFree] = useState("");
   const [dataOrders, setDataOrders] = useState([]);
-  
+
   const { fetchToAPI } = useFetchStore();
 
-  const handleSubmit = async (n) => {
+  const handleSubmit = async (n, obj) => {
     try {
-      const result = await fetchToAPI(n);
+      const result = await fetchToAPI(n, obj);
       return result;
     } catch (error) {
       console.error("Error en handleSubmit:", error);
