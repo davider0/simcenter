@@ -1,4 +1,7 @@
-# React + Vite
+# WIP TRADING 212 API AUTOMATION
+will update this readme when the project is ready to use
+
+## React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
