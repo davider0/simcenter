@@ -1,5 +1,5 @@
 # WIP TRADING 212 API AUTOMATION
-will update this readme when the project is ready to use
+will update this readme when the project is ready to use, please be patient
 
 ## React + Vite
 
