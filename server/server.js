@@ -320,6 +320,7 @@ app.post("/", async (req, res) => {
             console.log("Status:", response.statusCode);
             console.log(response);
           } else {
+            console.log(data);
             res.status(200).send({
               text: formatearTitular(data),
             });
