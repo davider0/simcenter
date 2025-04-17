@@ -104,7 +104,7 @@ function App() {
     }}>
       <header className="header" style={{ marginBottom: '20px', padding: '10px', borderRadius: '0px', outline: '4px solid #000', color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite' }}>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-          <h1 style={{ backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', animation: 'rainbow 3s linear infinite', backgroundSize: '200% auto', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent', fontFamily: 'Space Mono, monospace', flex: '1' }}><strong>Metil 212 | Dinero: {cash || cashFree}</strong> &emsp;
+          <h1 style={{ backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', animation: 'rainbow 3s linear infinite', backgroundSize: '200% auto', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent', fontFamily: 'Space Mono, monospace', flex: '1' }}><strong>Metil 212 | Dinero: {cash || cashFree} €</strong> &emsp;
             <button className='cs-btn' onClick={async () => {
               setCashFree(null);
               let c = await handleSubmit(2);
@@ -118,7 +118,7 @@ function App() {
           </h1>
           <div style={{ flex: '1', fontFamily: 'Space Mono, monospace' }}>
             <h3 >
-              <Headlines text='ILLO' />
+              <Headlines text={headlines} />
             </h3>
           </div>
         </div>

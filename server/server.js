@@ -297,12 +297,12 @@ app.post("/", async (req, res) => {
           json: true,
           headers: { "User-Agent": "request" },
         },
-        (err, res, data) => {
+        (err, response, data) => {
           if (err) {
             console.log("Error:", err);
-          } else if (res.statusCode !== 200) {
-            console.log("Status:", res.statusCode);
-            console.log(res);
+          } else if (response.statusCode !== 200) {
+            console.log("Status:", response.statusCode);
+            console.log(response);
           } else {
             res.status(200).send({
               text: data.feed?.[0]?.title || "",
