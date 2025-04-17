@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../App.css';
 import '../assets/fonts/ArialPixel.css';
 import '../assets/fonts/SpaceMono.css';
@@ -55,6 +55,7 @@ function App() {
   const [cash, setCash] = useState("");
   const [cashFree, setCashFree] = useState("");
   const [dataOrders, setDataOrders] = useState([]);
+  const [headlines, setHeadlines] = useState([]);
 
   const { fetchToAPI } = useFetchStore();
 
@@ -67,9 +68,21 @@ function App() {
       return null;
     }
   };
+  useEffect(() => {
+    const initializeData = async () => {
+      try {
+        const headlinesLocal = await handleSubmit(10);
+        setHeadlines(headlinesLocal);
+      } catch (error) {
+        console.error("Error initializing data:", error);
+      }
+    };
+
+    initializeData();
+  }, []); // Empty dependency array ensures this runs only once on mount
 
   return (
-    <div className="trading212" style={{ 
+    <div className="trading212" style={{
       fontFamily: 'Space Mono, monospace',
       padding: '20px',
       margin: '60px 100px',
