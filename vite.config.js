@@ -11,7 +11,7 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/trading212/, "/api/v0"),
         headers: {
-          Authorization: "Bearer "+TRADING,
+          Authorization: "Bearer 35762281ZJaTAvxiDLrvFiYEaitcAaXeHgulc",
           Origin: "https://live.trading212.com",
         },
       },
