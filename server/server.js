@@ -289,7 +289,23 @@ app.post("/", async (req, res) => {
 
     case 10: {
       // Using Alpha Vantage News API to get market headlines and sentiment
-      const url = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=AAPL,MSFT,SPY&apikey=${apiKeyAlphaVenture}`;
+      const url = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&apikey=${apiKeyAlphaVenture}`;
+      const formatearTitular = (headline) =>
+        headline.feed
+          .flatMap((item) => item.ticker_sentiment)
+          .map(
+            (ts) =>
+              `${ts.ticker}: ${
+                {
+                  Bullish: "Alcista",
+                  "Somewhat-Bullish": "Algo Alcista",
+                  Neutral: "Neutral",
+                  "Somewhat-Bearish": "Algo Bajista",
+                  Bearish: "Bajista",
+                }[ts.ticker_sentiment_label]
+              }`
+          )
+          .join(", ");
 
       request.get(
         {
@@ -305,7 +321,7 @@ app.post("/", async (req, res) => {
             console.log(response);
           } else {
             res.status(200).send({
-              text: data.feed?.[0]?.title || "",
+              text: formatearTitular(data),
             });
           }
         }

@@ -118,7 +118,7 @@ function App() {
           </h1>
           <div style={{ flex: '1', fontFamily: 'Space Mono, monospace' }}>
             <h3 >
-              <Headlines text={headlines} />
+              <Headlines text={headlines?.text} />
             </h3>
           </div>
         </div>
@@ -181,7 +181,7 @@ function App() {
       <hr className='cs-hr' />
       <div style={{ display: 'flex' }}>
         <footer className="footer" style={{ flex: '1', marginTop: '20px', padding: '10px', background: '#f5f5f5', borderRadius: '0px', outline: '4px solid #000', color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite', backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', backgroundSize: '200% auto' }}>
-          <h3 style={{ fontFamily: 'Space Mono, monospace' }}><strong>Órdenes de compra</strong></h3>
+          <h3 style={{ fontFamily: 'Space Mono, monospace' }}><strong>Órdenes</strong></h3>
           <br />
           <hr className='cs-hr' />
           <br />
@@ -192,7 +192,7 @@ function App() {
           }}>RECARGAR ORDENES</button><OrderCard jsonMeta={dataOrders} />
         </footer>
         <footer className="rightColumn" style={{ flex: '2', marginTop: '20px', marginLeft: '60px', padding: '10px', background: '#f5f5f5', borderRadius: '0px', outline: '4px solid #000', color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite', backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', backgroundSize: '200% auto', fontFamily: 'Space Mono, monospace', width: 'auto', overflowY: 'auto', overflowX: 'auto' }}>
-          <h3><strong>Órdenes de venta</strong></h3>
+          <h3><strong>Automatizaciones</strong></h3>
           <br />
           <hr className='cs-hr' />
           <br />
