@@ -292,8 +292,8 @@ app.post("/", async (req, res) => {
       const url = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&apikey=${apiKeyAlphaVenture}`;
       const formatearTitular = (headline) =>
         headline.feed
-          .flatMap((item) => item.ticker_sentiment)
-          .map(
+          ?.flatMap((item) => item.ticker_sentiment)
+          ?.map(
             (ts) =>
               `${ts.ticker}: ${
                 {

@@ -69,6 +69,8 @@ function App() {
     }
   };
   useEffect(() => {
+    const randomDelay = Math.floor(Math.random() * 3000) + 1000; // Random delay between 5-15 seconds
+
     const initializeData = async () => {
       try {
         const headlinesLocal = await handleSubmit(10);
@@ -78,7 +80,21 @@ function App() {
       }
     };
 
-    initializeData();
+    // Set up an interval to fetch data periodically with initial random delay
+    const intervalId = setInterval(() => {
+      initializeData();
+    }, 30000); // Fetch every 30 seconds after initial delay
+
+    // Initial fetch with random delay
+    const timeoutId = setTimeout(() => {
+      initializeData();
+    }, randomDelay);
+
+    // Cleanup function to clear interval and timeout
+    return () => {
+      clearInterval(intervalId);
+      clearTimeout(timeoutId);
+    };
   }, []); // Empty dependency array ensures this runs only once on mount
 
   return (
