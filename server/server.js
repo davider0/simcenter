@@ -5,7 +5,7 @@ import request from "request";
 dotenv.config();
 
 let apiKeyTrading = "35762281ZJaTAvxiDLrvFiYEaitcAaXeHgulc";
-let apiKeyAlphaVenture = "K9XDG449WV87CB31";
+let apiKeyAlphaVenture = "INMBO0KVFJB81SXC";
 
 const app = express();
 app.use(cors());
