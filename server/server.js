@@ -289,7 +289,7 @@ app.post("/", async (req, res) => {
 
     case 10: {
       // Using Alpha Vantage News API to get market headlines and sentiment
-      const url = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&apikey=${apiKeyAlphaVenture}`;
+      const url = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&apikey=milei`;
       const formatearTitular = (headline) =>
         headline.feed
           ?.flatMap((item) => item.ticker_sentiment)
