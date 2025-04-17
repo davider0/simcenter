@@ -286,6 +286,36 @@ app.post("/", async (req, res) => {
 
       break;
     }
+
+    case 10: {
+      // Using Alpha Vantage News API to get market headlines and sentiment
+      const url = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=AAPL,MSFT,SPY&apikey=${apiKeyAlphaVenture}`;
+      
+      request.get(
+        {
+          url: url,
+          json: true,
+          headers: { "User-Agent": "request" },
+        },
+        (err, res, data) => {
+          if (err) {
+            console.log("Error:", err);
+            res.status(500).send({ error: err });
+          } else if (res.statusCode !== 200) {
+            console.log("Status:", res.statusCode);
+            res.status(res.statusCode).send({ error: "API request failed" });
+          } else {
+            // Get the first headline text or empty string if not available
+            const headlineText = data.feed?.[0]?.title || "";
+
+            res.status(200).send({
+              text: headlineText
+            });
+          }
+        }
+      );
+      break;
+    }
   }
 });
 

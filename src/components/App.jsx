@@ -69,7 +69,26 @@ function App() {
   };
 
   return (
-    <div className="trading212" style={{ fontFamily: 'Space Mono, monospace', padding: '20px', borderRadius: '10px', outline: '4px solid #000', color: '#000' }}>
+    <div className="trading212" style={{ 
+      fontFamily: 'Space Mono, monospace',
+      padding: '20px',
+      margin: '60px 100px',
+      borderRadius: '0px',
+      border: '4px solid #000',
+      color: '#000',
+      boxShadow: `
+        20px 20px 60px rgba(255, 0, 0, 0.3),
+        -20px -20px 60px rgba(0, 0, 255, 0.3),
+        inset 5px 5px 10px rgba(255, 165, 0, 0.3),
+        inset -5px -5px 10px rgba(128, 0, 128, 0.3)
+      `,
+      position: 'relative',
+      transform: 'translate(-2px, -2px)',
+      transition: 'all 0.3s ease',
+      '&:hover': {
+        transform: 'translate(0, 0)'
+      }
+    }}>
       <header className="header" style={{ marginBottom: '20px', padding: '10px', borderRadius: '0px', outline: '4px solid #000', color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite' }}>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
           <h1 style={{ backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', animation: 'rainbow 3s linear infinite', backgroundSize: '200% auto', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent', fontFamily: 'Space Mono, monospace', flex: '1' }}><strong>Metil 212 | Dinero: {cash || cashFree}</strong> &emsp;
@@ -109,7 +128,7 @@ function App() {
           setData2([]);
         }}>LIMPIAR</button>
       </div>
-      <main className="main-content" style={{ display: 'flex' }}>
+      <main className="main-content" style={{ display: 'flex', margin: '20px 0' }}>
         <section className="left-column" style={{ flex: '1', marginRight: '20px', padding: '10px', borderRadius: '0px', outline: '4px solid #000', color: '#500000', maxHeight: '500px', overflowY: 'auto', fontFamily: 'Space Mono, monospace' }}>
           <Loader arrayJsons={data2} />
         </section>
@@ -157,7 +176,7 @@ function App() {
             let res = await handleSubmit(3);
             console.log(res);
             setDataOrders(res);
-          }}>RECARGAR ORDENES</button><OrderCard jsonMeta={orderDefault} />
+          }}>RECARGAR ORDENES</button><OrderCard jsonMeta={dataOrders} />
         </footer>
         <footer className="rightColumn" style={{ flex: '2', marginTop: '20px', marginLeft: '60px', padding: '10px', background: '#f5f5f5', borderRadius: '0px', outline: '4px solid #000', color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite', backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', backgroundSize: '200% auto', fontFamily: 'Space Mono, monospace', width: 'auto', overflowY: 'auto', overflowX: 'auto' }}>
           <h3><strong>Órdenes de venta</strong></h3>

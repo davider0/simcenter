@@ -16,9 +16,9 @@ const OrderCard = ({ jsonMeta }) => {
                             id={tabId}
                             defaultChecked={index % 3 === 0}
                         />
-                        <label className="label" htmlFor={tabId}>Orden {index + 1}: {item.ticker}</label>
+                        <label className="label" htmlFor={tabId}>Orden de {item.quantity < 0 ? "venta" : "compra"} {index + 1}: {item.ticker}</label>
                         <div className="panel" tabIndex={index + 1}>
-                            <h2>Orden {index + 1}</h2>
+                            <h2>Orden de {item.quantity < 0 ? "venta" : "compra"} {index + 1}</h2>
                             <p>Ticker: {item.ticker}</p>
                             <p>Tipo: {item.type}</p>
                             <p>Estado: {item.status}</p>
@@ -30,9 +30,6 @@ const OrderCard = ({ jsonMeta }) => {
 
                                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                                     <button className='cs-btn'>CANCELAR ORDEN DE COMPRA</button>
-                                    <button className='cs-btn' disabled>DETENER OBSERVACION PRECIO</button>
-                                    <button className='cs-btn' >PONER LIMITE...</button>
-                                    <button className='cs-btn' disabled>VENDER</button>
                                 </div>
                                 <button className='cs-btn'>QUITAR</button>
                                 <DialogConsole />
