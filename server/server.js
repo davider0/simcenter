@@ -320,7 +320,7 @@ app.post("/", async (req, res) => {
             console.log(data);
             const x = procesarTickers(data);
             res.status(200).send({
-              text: x,
+              bot: x,
             });
           }
         }
@@ -329,18 +329,16 @@ app.post("/", async (req, res) => {
     }
     case 11: {
       const url = `https://finnhub.io/api/v1/news?category=general&token=d013m1hr01qv3oh2gc2gd013m1hr01qv3oh2gc30`;
-      
+
       function procesarTickers(data) {
         const resultados = [];
         for (const noticia of data) {
           if (noticia.related) {
-            const tickers = noticia.related.split(',');
+            const tickers = noticia.related.split(",");
             for (const ticker of tickers) {
-              const sentiment = Math.random() > 0.5 ? '↑' : '↓';
+              const sentiment = Math.random() > 0.5 ? "↑" : "↓";
               const score = (Math.random() * 2 - 1).toFixed(2);
-              resultados.push(
-                `${ticker.trim()}: ${score} ${sentiment}`
-              );
+              resultados.push(`${ticker.trim()}: ${score} ${sentiment}`);
             }
           }
         }
@@ -363,7 +361,7 @@ app.post("/", async (req, res) => {
             console.log(data);
             const x = procesarTickers(data);
             res.status(200).send({
-              text: x,
+              bot: x,
             });
           }
         }

@@ -73,7 +73,7 @@ function App() {
 
     const initializeData = async () => {
       try {
-        const headlinesLocal = await handleSubmit(10);
+        const headlinesLocal = await handleSubmit(11);
         console.log(headlinesLocal);
         setHeadlines(headlinesLocal);
       } catch (error) {
