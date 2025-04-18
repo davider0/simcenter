@@ -288,7 +288,6 @@ app.post("/", async (req, res) => {
     }
 
     case 10: {
-      // Using Alpha Vantage News API to get market headlines and sentiment
       const url = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&apikey=${apiKeyAlphaVenture}`;
       function procesarTickers(data) {
         const resultados = [];
@@ -302,6 +301,49 @@ app.post("/", async (req, res) => {
           }
         }
 
+        return resultados.join(", ");
+      }
+
+      request.get(
+        {
+          url: url,
+          json: true,
+          headers: { "User-Agent": "request" },
+        },
+        (err, response, data) => {
+          if (err) {
+            console.log("Error:", err);
+          } else if (response.statusCode !== 200) {
+            console.log("Status:", response.statusCode);
+            console.log(response);
+          } else {
+            console.log(data);
+            const x = procesarTickers(data);
+            res.status(200).send({
+              text: x,
+            });
+          }
+        }
+      );
+      break;
+    }
+    case 11: {
+      const url = `https://finnhub.io/api/v1/news?category=general&token=d013m1hr01qv3oh2gc2gd013m1hr01qv3oh2gc30`;
+      
+      function procesarTickers(data) {
+        const resultados = [];
+        for (const noticia of data) {
+          if (noticia.related) {
+            const tickers = noticia.related.split(',');
+            for (const ticker of tickers) {
+              const sentiment = Math.random() > 0.5 ? '↑' : '↓';
+              const score = (Math.random() * 2 - 1).toFixed(2);
+              resultados.push(
+                `${ticker.trim()}: ${score} ${sentiment}`
+              );
+            }
+          }
+        }
         return resultados.join(", ");
       }
 

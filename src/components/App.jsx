@@ -55,7 +55,7 @@ function App() {
   const [cash, setCash] = useState("");
   const [cashFree, setCashFree] = useState("");
   const [dataOrders, setDataOrders] = useState([]);
-  const [headlines, setHeadlines] = useState([]);
+  const [headlines2, setHeadlines] = useState("");
 
   const { fetchToAPI } = useFetchStore();
 
@@ -74,6 +74,7 @@ function App() {
     const initializeData = async () => {
       try {
         const headlinesLocal = await handleSubmit(10);
+        console.log(headlinesLocal);
         setHeadlines(headlinesLocal);
       } catch (error) {
         console.error("Error initializing data:", error);
@@ -134,7 +135,7 @@ function App() {
           </h1>
           <div style={{ flex: '1', fontFamily: 'Space Mono, monospace' }}>
             <h3 >
-              <Headlines text={headlines?.text} />
+              <Headlines text={headlines2?.text} />
             </h3>
           </div>
         </div>
