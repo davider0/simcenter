@@ -292,22 +292,18 @@ app.post("/", async (req, res) => {
       const url = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&apikey=${apiKeyAlphaVenture}`;
       function procesarTickers(data) {
         const resultados = [];
-        
-        
         for (const noticia of data.feed) {
-            // Verificar si hay tickers en la noticia
-            if (noticia.ticker_sentiment && noticia.ticker_sentiment.length > 0) {
-                // Procesar cada ticker en el array
-                for (const tickerInfo of noticia.ticker_sentiment) {
-                    resultados.push(
-                        `${tickerInfo.ticker}: ${tickerInfo.ticker_sentiment_score}`
-                    );
-                }
+          if (noticia.ticker_sentiment && noticia.ticker_sentiment.length > 0) {
+            for (const tickerInfo of noticia.ticker_sentiment) {
+              resultados.push(
+                `${tickerInfo.ticker}: ${tickerInfo.ticker_sentiment_score}`
+              );
             }
+          }
         }
-        
-        return resultados.join(', ');
-    }
+
+        return resultados.join(", ");
+      }
 
       request.get(
         {
@@ -324,7 +320,7 @@ app.post("/", async (req, res) => {
           } else {
             console.log(data);
             res.status(200).send({
-              text: formatearTitular(data),
+              text: procesarTickers(data),
             });
           }
         }
