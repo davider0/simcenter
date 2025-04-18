@@ -319,8 +319,9 @@ app.post("/", async (req, res) => {
             console.log(response);
           } else {
             console.log(data);
+            const x = procesarTickers(data);
             res.status(200).send({
-              text: procesarTickers(data),
+              text: x,
             });
           }
         }
