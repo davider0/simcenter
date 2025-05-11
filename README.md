@@ -1,5 +1,5 @@
 # WIP TRADING 212 API AUTOMATION
-classic MERN stack u can use to automate buy (not sell) orders in Trading 212, work in progress 🔨
+classic MERN stack u can use to automate buy and sell orders in Trading 212, work in progress 🔨
 
 ## React + Vite
 
