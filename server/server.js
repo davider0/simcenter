@@ -288,6 +288,7 @@ app.post("/", async (req, res) => {
     }
 
     case 10: {
+      console.log("hola soy el backend vengo a analizar las noticias");
       const url = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&apikey=${apiKeyAlphaVenture}`;
       function procesarTickers(data) {
         const resultados = [];

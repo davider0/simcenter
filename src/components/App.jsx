@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import '../App.css';
 import '../assets/fonts/ArialPixel.css';
 import '../assets/fonts/SpaceMono.css';
@@ -68,35 +68,7 @@ function App() {
       return null;
     }
   };
-  useEffect(() => {
-    const randomDelay = Math.floor(Math.random() * 3000) + 1000; // Random delay between 5-15 seconds
 
-    const initializeData = async () => {
-      try {
-        const headlinesLocal = await handleSubmit(11);
-        console.log(headlinesLocal);
-        setHeadlines(headlinesLocal);
-      } catch (error) {
-        console.error("Error initializing data:", error);
-      }
-    };
-
-    // Set up an interval to fetch data periodically with initial random delay
-    const intervalId = setInterval(() => {
-      initializeData();
-    }, 30000); // Fetch every 30 seconds after initial delay
-
-    // Initial fetch with random delay
-    const timeoutId = setTimeout(() => {
-      initializeData();
-    }, randomDelay);
-
-    // Cleanup function to clear interval and timeout
-    return () => {
-      clearInterval(intervalId);
-      clearTimeout(timeoutId);
-    };
-  }, []); // Empty dependency array ensures this runs only once on mount
 
   return (
     <div className="trading212" style={{
@@ -121,7 +93,7 @@ function App() {
     }}>
       <header className="header" style={{ marginBottom: '20px', padding: '10px', borderRadius: '0px', outline: '4px solid #000', color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite' }}>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-          <h1 style={{ backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', animation: 'rainbow 3s linear infinite', backgroundSize: '200% auto', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent', fontFamily: 'Space Mono, monospace', flex: '1' }}><strong>Metil 212 | Dinero: {cash || cashFree} €</strong> &emsp;
+          <h1 style={{ backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', animation: 'rainbow 3s linear infinite', backgroundSize: '200% auto', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent', fontFamily: 'Space Mono, monospace', flex: '1' }}><strong>Evadify | Dinero: {cash || cashFree} €</strong> &emsp;
             <button className='cs-btn' onClick={async () => {
               setCashFree(null);
               let c = await handleSubmit(2);
@@ -132,6 +104,12 @@ function App() {
               let c = await handleSubmit(2);
               setCash("" + (JSON.parse(c)["free"]));
             }}><img src={kvm} alt="Descripción de la imagen" style={{ width: '20px', height: '20px' }} /></button>
+            <button className='cs-btn' onClick={async () => {
+              setHeadlines("");
+              let c = await handleSubmit(10);
+              setHeadlines(c);
+            }}>📰</button>
+
           </h1>
           <div style={{ flex: '1', fontFamily: 'Space Mono, monospace' }}>
             <h3 >
@@ -165,7 +143,7 @@ function App() {
         <section className="right-column" style={{ flex: '2', padding: '10px', background: '#f5f5f5', borderRadius: '0px', maxHeight: '500px', outline: '4px solid #000', color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite', backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', backgroundSize: '200% auto' }}>
 
           <div className="feature" style={{ marginBottom: '10px', fontFamily: 'Space Mono, monospace' }}>
-            <h3 style={{ color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite', backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', backgroundSize: '200% auto' }}><strong>Bienvenido a Metil 212</strong></h3>
+            <h3 style={{ color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite', backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', backgroundSize: '200% auto' }}><strong>Bienvenido a Evadify</strong></h3>
             <p style={{ color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite', backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', backgroundSize: '200% auto' }}>Automatiza la compra y venta de acciones del mercado del primer mundo.<br />Mete en la lista de observación una sociedad para empezar.
             </p>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
