@@ -17,7 +17,7 @@ const DialogConsole = ({ value, onClick }) => {
                 background: '#f2f2f2',
                 border: '3px solid #000',
                 color: '#000',
-                height: '100%',
+                maxHeight: '450px',
                 width: 'auto',
                 overflowY: 'scroll',
                 fontFamily: 'Courier New, monospace',

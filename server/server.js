@@ -392,9 +392,9 @@ app.post("/", async (req, res) => {
             console.log("Status:", response.statusCode);
             console.log(response);
           } else {
-            console.log({ ...data });
+            console.log({...data.lists[2].metadata.instrumentSet.instruments});
             res.status(200).send({
-              bot: { ...data },
+              bot: {...data.lists[2].metadata.instrumentSet.instruments},
             });
           }
         }
