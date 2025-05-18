@@ -332,6 +332,17 @@ app.post("/", async (req, res) => {
     case 11: {
       const url = `https://live.services.trading212.com/rest/watchlists/v4/pinned-lists`;
 
+      // Prevenir errores de bloqueo
+      let lastRequestTime = 0;
+      const MIN_REQUEST_INTERVAL = 5000; // 5 seconds
+      const now = Date.now();
+      if (now - lastRequestTime < MIN_REQUEST_INTERVAL) {
+        await new Promise((resolve) =>
+          setTimeout(resolve, MIN_REQUEST_INTERVAL - (now - lastRequestTime))
+        );
+      }
+      lastRequestTime = Date.now();
+
       request.get(
         {
           url: url,
@@ -378,7 +389,6 @@ app.post("/", async (req, res) => {
               "ttcsid_CE50IL3C77U118FB7AL0=1745334942713%3A%3AYINohrgZ7t1Wiwqykdug.6.1745334943014; " +
               "WZRK_G=6c36b6268bc0412085d27be95f4e0606; " +
               "WZRK_S_6ZW-WZ7-6W7Z=%7B%22s%22%3A1747503433%2C%22t%22%3A1747504118%2C%22p%22%3A1%7D",
-            Host: "live.services.trading212.com",
             Origin: "https://app.trading212.com",
             Referer: "https://app.trading212.com/",
             "Sec-Fetch-Dest": "empty",
