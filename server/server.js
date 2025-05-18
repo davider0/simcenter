@@ -340,7 +340,19 @@ app.post("/", async (req, res) => {
             Accept: "application/json",
             "User-Agent": "request",
             Cookie:
-              "LANDING_PAGE=%2Fes; __adal_id=bf2a90c3-3747-4209-a6d0-9f988642470d.1734389483.73.1747402585.1747342927.8f7a2939-7fe1-4731-8633-aa5e6094b006; __adal_ca=so%3DGoogle%26me%3Dorganic%26ca%3D%28not%2520set%29%26co%3D%28not%2520set%29%26ke%3D%28not%2520set%29; _ga_MHBZW1QBME=GS2.1.s1747503433$o158$g1$t1747504117$j0$l0$h462150800; _ga=GA1.1.1441778917.1734389483; _tt_enable_cookie=1; _ttp=gzOajZ0Wj0jhhr00BW88b0V5ksw.tt.1; FPID=FPID2.2.fgB3IZG4bxUKU3iMYoFbIyc6kFHUwuDIDNtL25WkuoQ%3D.1734389483; _gtmeec=eyJlbSI6ImViNm…eRC329SYDgLPwaJJgFWP2mhnM2QaHtVcZHQ-1747503433-1.0.1.1-yQeI15OcJonbdgJ.VW7S2WFOyd11MpU5RlnKSyE7AiGzP_Qz8eNRudj_1z4bIBh5bMTphnodmTrz.fx6W7kvpu8eaTys9L0iwnBo_R9Ze74; FPLC=wHQEhSldJvq9E6dF4hCFsg8WRThDZXEKckWLircZVm1cp%2F0LTOyxPY%2F6sxc4yUWgqdlVQmsaQxhgqiyEgwudBwK90YC9bHHJO793YJeXDCvRLg78Eb%2BC84BiPl6sAA%3D%3D; FPGSID=1.1747503433.1747503433.G-MHBZW1QBME.2r4dtxjEcM7W34J3R2zmXQ; _rdt_uuid=1734389482376.d10edaa3-67b0-45dd-a526-72507ff067b1; _rdt_em=eb6a549d4b709aafa27a236b99fed69829bf5c56a544e0689dbb47c6758ab4a7",
+              "LANDING_PAGE=%2Fes; " +
+              "__adal_id=bf2a90c3-3747-4209-a6d0-9f988642470d.1734389483.73.1747402585.1747342927.8f7a2939-7fe1-4731-8633-aa5e6094b006; " +
+              "__adal_ca=so%3DGoogle%26me%3Dorganic%26ca%3D%28not%2520set%29%26co%3D%28not%2520set%29%26ke%3D%28not%2520set%29; " +
+              "_ga_MHBZW1QBME=GS2.1.s1747503433$o158$g1$t1747504117$j0$l0$h462150800; " +
+              "_ga=GA1.1.1441778917.1734389483; " +
+              "_tt_enable_cookie=1; " +
+              "_ttp=gzOajZ0Wj0jhhr00BW88b0V5ksw.tt.1; " +
+              "FPID=FPID2.2.fgB3IZG4bxUKU3iMYoFbIyc6kFHUwuDIDNtL25WkuoQ%3D.1734389483; " +
+              "_gtmeec=eyJlbSI6ImViNm…eRC329SYDgLPwaJJgFWP2mhnM2QaHtVcZHQ-1747503433-1.0.1.1-yQeI15OcJonbdgJ.VW7S2WFOyd11MpU5RlnKSyE7AiGzP_Qz8eNRudj_1z4bIBh5bMTphnodmTrz.fx6W7kvpu8eaTys9L0iwnBo_R9Ze74; " +
+              "FPLC=wHQEhSldJvq9E6dF4hCFsg8WRThDZXEKckWLircZVm1cp%2F0LTOyxPY%2F6sxc4yUWgqdlVQmsaQxhgqiyEgwudBwK90YC9bHHJO793YJeXDCvRLg78Eb%2BC84BiPl6sAA%3D%3D; " +
+              "FPGSID=1.1747503433.1747503433.G-MHBZW1QBME.2r4dtxjEcM7W34J3R2zmXQ; " +
+              "_rdt_uuid=1734389482376.d10edaa3-67b0-45dd-a526-72507ff067b1; " +
+              "_rdt_em=eb6a549d4b709aafa27a236b99fed69829bf5c56a544e0689dbb47c6758ab4a7",
             Host: "live.services.trading212.com",
             Origin: "https://app.trading212.com",
             Priority: "u=6",
