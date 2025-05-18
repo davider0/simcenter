@@ -338,7 +338,15 @@ app.post("/", async (req, res) => {
           json: true,
           headers: {
             Accept: "application/json",
-            "User-Agent": "request",
+            "User-Agent":
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Cache-Control": "no-cache",
+            "sec-ch-ua":
+              '"Chromium";v="125", "Google Chrome";v="125", "Not.A/Brand";v="24"',
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": '"Windows"',
             Cookie:
               "LANDING_PAGE=%2Fes; " +
               "__adal_id=bf2a90c3-3747-4209-a6d0-9f988642470d.1734389483.73.1747402585.1747342927.8f7a2939-7fe1-4731-8633-aa5e6094b006; " +
@@ -370,14 +378,11 @@ app.post("/", async (req, res) => {
               "ttcsid_CE50IL3C77U118FB7AL0=1745334942713%3A%3AYINohrgZ7t1Wiwqykdug.6.1745334943014; " +
               "WZRK_G=6c36b6268bc0412085d27be95f4e0606; " +
               "WZRK_S_6ZW-WZ7-6W7Z=%7B%22s%22%3A1747503433%2C%22t%22%3A1747504118%2C%22p%22%3A1%7D",
-            Host: "live.services.trading212.com",
             Origin: "https://app.trading212.com",
-            Priority: "u=6",
             Referer: "https://app.trading212.com/",
             "Sec-Fetch-Dest": "empty",
             "Sec-Fetch-Mode": "cors",
             "Sec-Fetch-Site": "same-site",
-            "Sec-GPC": "1",
           },
         },
         (err, response, data) => {
