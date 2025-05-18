@@ -1,7 +1,6 @@
 import cors from "cors";
 import * as dotenv from "dotenv";
 import express from "express";
-import fetch from "node-fetch";
 import request from "request";
 
 dotenv.config();
