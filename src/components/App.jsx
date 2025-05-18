@@ -56,6 +56,7 @@ function App() {
   const [cashFree, setCashFree] = useState("");
   const [dataOrders, setDataOrders] = useState([]);
   const [headlines2, setHeadlines] = useState("");
+  const [textDialog, setTextDialog] = useState("Haga clic aquí para recargar");
 
   const { fetchToAPI } = useFetchStore();
 
@@ -167,8 +168,19 @@ function App() {
           <section className="right-column" style={{ flex: '1', padding: '10px', background: '#f5f5f5', borderRadius: '0px', outline: '4px solid #000', color: 'transparent', WebkitBackgroundClip: 'text', backgroundClip: 'text', animation: 'rainbow 3s linear infinite', backgroundImage: 'linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(237,255,0,1) 14%, rgba(0,255,21,1) 29%, rgba(0,255,239,1) 41%, rgba(12,0,255,1) 59%, rgba(149,0,255,1) 72%, rgba(255,0,159,1) 88%, rgba(255,0,0,1) 100%)', backgroundSize: '200% auto', maxHeight: '100px', overflowY: 'auto' }}>
           </section>
         </section >
-        <section className="right-column" style={{ flex: '3', marginLeft: '20px', padding: '10px', borderRadius: '0px', outline: '4px solid #000', color: '#500000', maxHeight: 'auto', overflowY: 'auto', fontFamily: 'Space Mono, monospace', maxWidth: '300px' }}>
-          <DialogConsole initialText="API lista"></DialogConsole>
+        <section className="right-column" style={{ flex: '3', marginLeft: '20px', padding: '10px', borderRadius: '0px', outline: '4px solid #000', color: '#500000', maxHeight: 'auto', overflowY: 'auto', maxWidth: '300px' }}>
+          <DialogConsole
+            onClick={async () => {
+              try {
+                const res = await handleSubmit(11);
+                const responseText = JSON.stringify(res, null, 2);
+                setTextDialog(responseText);
+              } catch (error) {
+                setTextDialog(`Error: ${error.message}`);
+              }
+            }}
+            value={textDialog}
+          />
         </section>
 
       </main >
