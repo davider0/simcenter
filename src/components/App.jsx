@@ -8,7 +8,7 @@ import DialogConsole from './DialogConsole';
 import Headlines from './Headlines';
 import Loader from './loader';
 import OrderCard from './OrderCard';
-
+/*
 var orderDefault = [{
   "creationTime": "2019-08-24T14:15:22Z",
   "filledQuantity": 0,
@@ -49,7 +49,7 @@ var orderDefault = [{
   "type": "LIMIT",
   "value": 0
 }];
-
+*/
 function App() {
   const [data2, setData2] = useState([]);
   const [cash, setCash] = useState("");
@@ -168,7 +168,7 @@ function App() {
           </section>
         </section >
         <section className="right-column" style={{ flex: '3', marginLeft: '20px', padding: '10px', borderRadius: '0px', outline: '4px solid #000', color: '#500000', maxHeight: 'auto', overflowY: 'auto', fontFamily: 'Space Mono, monospace', maxWidth: '300px' }}>
-          <DialogConsole text="API lista"></DialogConsole>
+          <DialogConsole initialText="API lista"></DialogConsole>
         </section>
 
       </main >
