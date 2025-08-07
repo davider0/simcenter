@@ -332,17 +332,6 @@ app.post("/", async (req, res) => {
     case 11: {
       const url = `https://live.services.trading212.com/rest/watchlists/v4/pinned-lists`;
 
-      // Prevenir errores de bloqueo
-      let lastRequestTime = 0;
-      const MIN_REQUEST_INTERVAL = 5000; // 5 seconds
-      const now = Date.now();
-      if (now - lastRequestTime < MIN_REQUEST_INTERVAL) {
-        await new Promise((resolve) =>
-          setTimeout(resolve, MIN_REQUEST_INTERVAL - (now - lastRequestTime))
-        );
-      }
-      lastRequestTime = Date.now();
-
       request.get(
         {
           url: url,
