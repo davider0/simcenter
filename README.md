@@ -1,6 +1,6 @@
 # Centro de Simulación 📊
 
-MERN Stack para gestionar transacciones de inversión
+MERN Stack para gestionar peticiones API
 
 ## Índice 📚
 
