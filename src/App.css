@@ -32,6 +32,47 @@ body {
   line-height: 1.6;
 }
 
+/* Estilos para el componente Large3DList con Three.js */
+.three-js-container {
+  position: relative;
+  min-height: 400px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px var(--shadow-light);
+  background-color: var(--neutral);
+  margin: 20px 0;
+}
+
+.three-js-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  outline: none;
+}
+
+/* Cursor personalizado para interacción */
+.three-js-container:hover {
+  cursor: grab;
+}
+
+.three-js-container:active {
+  cursor: grabbing;
+}
+
+/* Animaciones y transiciones */
+@keyframes orbit {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+/* Estilos para pantallas táctiles */
+@media (hover: none) {
+  .three-js-container {
+    touch-action: none;
+  }
+}
+
 button,
 input,
 select,
