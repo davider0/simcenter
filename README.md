@@ -1,6 +1,6 @@
 # Centro de Simulación 📊
 
-MERN Stack para gestionar peticiones API
+MERN Stack para proyectos con Three.js y API Restful
 
 ## Índice 📚
 
