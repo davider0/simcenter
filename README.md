@@ -16,6 +16,10 @@ La solución se compone de dos componentes principales:
 - **Frontend (React/Vite):** Interfaz de usuario para la gestión y visualización de operaciones
 - **Backend (Node.js/Express):** API RESTful que gestiona la lógica de negocio, la interacción con la APIs
 
+Actualmente se están llevando a cabo los siguientes proyectos:
+- Frontend del temporizador del iPhone con Three.js (en proceso)
+- Menú principal inspirado en otro proyecto mío (en proceso)
+
 ## Configuración y Despliegue Local ⚙️
 
 Para configurar y ejecutar el proyecto en un entorno de desarrollo local, sigue los siguientes pasos:
