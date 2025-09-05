@@ -1,6 +1,6 @@
 # Centro de Simulación 📊
 
-MERN Stack para gestionar transacciones de inversión
+MERN Stack para gestionar peticiones API
 
 ## Índice 📚
 
@@ -54,4 +54,4 @@ Para configurar y ejecutar el proyecto en un entorno de desarrollo local, sigue 
 
 ## Licencia 📄
 
-Este proyecto se distribuye bajo la licencia MIT. Consulte el archivo `LICENSE` para más detalles.
+No hay. Copia y pega todo lo que quieras
