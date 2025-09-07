@@ -19,112 +19,84 @@ const Large3DList = ({ items: initialItems }) => {
     const rotationSpeedRef = useRef(0);
     const targetRotationRef = useRef(0);
 
-    // Inicializar la escena Three.js
+    // Inicializar Three.js
     useEffect(() => {
-        // Crear escena
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(0xffffff);
         sceneRef.current = scene;
 
-        // Crear cámara
         const camera = new THREE.PerspectiveCamera(
-            75, // FOV
-            window.innerWidth / window.innerHeight, // Aspect ratio
-            0.1, // Near
-            1000 // Far
+            75,
+            1,
+            0.1,
+            1000
         );
         camera.position.z = 10;
         cameraRef.current = camera;
 
-        // Crear renderer
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        const { clientWidth, clientHeight } = containerRef.current;
+        renderer.setSize(clientWidth, clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         containerRef.current.appendChild(renderer.domElement);
         rendererRef.current = renderer;
 
-        // Añadir controles de órbita
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
         controls.dampingFactor = 0.05;
         controls.rotateSpeed = 1;
         controls.enableZoom = false;
         controls.enablePan = false;
-        controls.minDistance = 5;
-        controls.maxDistance = 20;
-        controls.enableRotate = false;
+        controls.enableRotate = false; // rotamos con nuestro propio gesto
         controlsRef.current = controls;
 
-        // Añadir luz
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
         scene.add(ambientLight);
 
         const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
         directionalLight.position.set(0, 1, 5);
         scene.add(directionalLight);
 
-        // Crear elementos en circunferencia
+        // Crear items en circunferencia
+        createItemsInCircle();
 
-
-        // Función de animación
         const animate = () => {
             requestAnimationFrame(animate);
 
-            // Actualizar controles
             controls.update();
 
-            // Aplicar rotación automática si hay velocidad
+            // Inercia de giro
             if (Math.abs(rotationSpeedRef.current) > 0.001) {
-                // Aplicar fricción para desacelerar gradualmente
                 rotationSpeedRef.current *= 0.98;
-
-                // Rotar el grupo completo en lugar de elementos individuales
                 const circleGroup = itemsRef.current.circleGroup;
                 if (circleGroup) {
                     circleGroup.rotation.x += rotationSpeedRef.current;
-
-                    // Asegurar que todos los textos mantengan su orientación frontal
-                    itemsRef.current.forEach(item => {
-                        if (item.rotation) {
-                            item.rotation.x = 0; // Mantener siempre de frente
-                        }
-                    });
                 }
             }
 
-            // Animar hacia la rotación objetivo
-            if (selectedItemRef.current === null && Math.abs(targetRotationRef.current) > 0.001) {
+            // Animación hacia rotación objetivo
+            if (
+                selectedItemRef.current === null &&
+                Math.abs(targetRotationRef.current) > 0.001
+            ) {
                 const step = targetRotationRef.current * 0.05;
-
-                // Rotar el grupo en lugar de la escena
                 const circleGroup = itemsRef.current.circleGroup;
                 if (circleGroup) {
                     circleGroup.rotation.x += step;
-
-                    // Asegurar que todos los textos mantengan su orientación frontal
-                    itemsRef.current.forEach(item => {
-                        if (item.rotation) {
-                            item.rotation.x = 0; // Mantener siempre de frente
-                        }
-                    });
                 }
-
                 targetRotationRef.current -= step;
             }
 
             renderer.render(scene, camera);
         };
 
-        // Iniciar animación
         animate();
 
-        // Event listeners para interacción
         window.addEventListener('resize', handleResize);
         renderer.domElement.addEventListener('mousedown', handleMouseDown);
         renderer.domElement.addEventListener('mousemove', handleMouseMove);
         renderer.domElement.addEventListener('mouseup', handleMouseUp);
 
-        // Limpieza al desmontar
         return () => {
             window.removeEventListener('resize', handleResize);
             renderer.domElement.removeEventListener('mousedown', handleMouseDown);
@@ -134,207 +106,163 @@ const Large3DList = ({ items: initialItems }) => {
             if (containerRef.current && renderer.domElement) {
                 containerRef.current.removeChild(renderer.domElement);
             }
-
             renderer.dispose();
         };
     }, []);
 
-    // Actualizar cuando cambian los items
+    // Cuando cambian los items, recrear
     useEffect(() => {
-        if (sceneRef.current) {
-            // Limpiar items anteriores
-            itemsRef.current.forEach(item => {
-                sceneRef.current.remove(item);
-            });
-            itemsRef.current = [];
+        if (!sceneRef.current) return;
 
-            // Crear nuevos items
-            createItemsInCircle();
+        // limpiar anteriores
+        if (itemsRef.current.circleGroup) {
+            sceneRef.current.remove(itemsRef.current.circleGroup);
         }
+        itemsRef.current.forEach((m) => m?.geometry?.dispose?.());
+        itemsRef.current = [];
+
+        createItemsInCircle();
     }, [initialItems]);
 
-    // Crear elementos en una circunferencia
+    // Crear elementos en circunferencia
     const createItemsInCircle = () => {
         if (!sceneRef.current) return;
 
         const scene = sceneRef.current;
-        const radius = 5; // Radio de la circunferencia
-        const itemCount = items.length;
+        const radius = 5;
+        const itemCount = items.length || 1;
 
-        // Grupo principal que contendrá todos los elementos
         const circleGroup = new THREE.Group();
         scene.add(circleGroup);
 
         items.forEach((item, index) => {
-            // Calcular posición en la circunferencia
             const angle = (index / itemCount) * Math.PI * 2;
             const y = radius * Math.sin(angle);
             const z = radius * Math.cos(angle);
 
-            // Crear canvas para el texto (más grande para mejor calidad)
+            // Canvas de texto
             const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
-            canvas.width = 512;
-            canvas.height = 256;
+            const ctx = canvas.getContext('2d');
+            canvas.width = 1255;
+            canvas.height = 184;
+            ctx.font = '72px "Segoe UI"';
+            ctx.fillStyle = '#000';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillText(String(item), canvas.width / 2, canvas.height / 2);
 
-            // Configurar estilo de texto (más grande y nítido)
-            context.font = 'Bold 72px Segoe UI';
-            context.fillStyle = '#1b5e20';
-            context.textAlign = 'center';
-            context.textBaseline = 'middle';
-            context.fillText(item, canvas.width / 2, canvas.height / 2);
-
-            // Crear textura a partir del canvas
             const texture = new THREE.CanvasTexture(canvas);
             texture.needsUpdate = true;
+            texture.anisotropy = 4;
 
-            // Crear material con transparencia
-            const textMaterial = new THREE.MeshBasicMaterial({
+            const material = new THREE.MeshBasicMaterial({
                 map: texture,
                 transparent: true,
-                side: THREE.DoubleSide
+                side: THREE.DoubleSide, // Ver por delante y por detrás (evita clipping)
             });
 
-            // Crear solo un plano para el texto (sin geometría de caja)
-            const textGeometry = new THREE.PlaneGeometry(2, 1);
-            const mesh = new THREE.Mesh(textGeometry, textMaterial);
+            const geometry = new THREE.PlaneGeometry(2, 1);
+            const mesh = new THREE.Mesh(geometry, material);
 
-            // Posicionar en la circunferencia
+            // Posición en el círculo
             mesh.position.set(0, y, z);
 
-            // Rotar para que mire siempre hacia la cámara (de frente)
-            mesh.lookAt(0, 0, 10);
 
-            // Asegurar que el texto siempre esté de frente a la cámara
-            // Anular cualquier rotación en X para que no mire hacia arriba o abajo
-            mesh.rotation.x = 0;
+            const parentQuat = new THREE.Quaternion();
+            const invParentQuat = new THREE.Quaternion();
+            mesh.onBeforeRender = (renderer, scene, camera) => {
+                if (!mesh.parent) return;
+                mesh.parent.getWorldQuaternion(parentQuat);
+                invParentQuat.copy(parentQuat).invert();
+                mesh.quaternion.copy(camera.quaternion).premultiply(invParentQuat);
+            };
 
-            // Guardar datos adicionales en el mesh
             mesh.userData = {
                 index,
                 value: item,
                 originalPosition: { x: 0, y, z },
-                originalRotation: mesh.rotation.clone(),
                 isHovered: false,
             };
 
-            // Añadir al grupo
             circleGroup.add(mesh);
-
-            // Guardar referencia
             itemsRef.current.push(mesh);
         });
 
-        // Guardar el grupo principal
         itemsRef.current.circleGroup = circleGroup;
     };
 
-    // Manejar redimensionamiento de ventana
     const handleResize = () => {
         if (!cameraRef.current || !rendererRef.current || !containerRef.current) return;
 
         const camera = cameraRef.current;
         const renderer = rendererRef.current;
+        const { clientWidth, clientHeight } = containerRef.current;
 
-        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.aspect = clientWidth / clientHeight;
         camera.updateProjectionMatrix();
 
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(clientWidth, clientHeight);
     };
 
-    // Manejar inicio de arrastre
     const handleMouseDown = (event) => {
         if (!containerRef.current || !cameraRef.current || !sceneRef.current) return;
 
-        // Calcular posición del mouse normalizada
         const rect = containerRef.current.getBoundingClientRect();
+        mouseRef.current.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
         mouseRef.current.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
-        // Lanzar rayo desde la cámara
         raycasterRef.current.setFromCamera(mouseRef.current, cameraRef.current);
 
-        // Comprobar intersecciones con los elementos
-        const intersects = raycasterRef.current.intersectObjects(itemsRef.current);
+        const intersects = raycasterRef.current.intersectObjects(itemsRef.current, false);
 
         if (intersects.length > 0) {
-            // Deshabilitar controles de órbita temporalmente
-            if (controlsRef.current) {
-                controlsRef.current.enabled = false;
-            }
-
-            // Marcar como arrastrando
+            if (controlsRef.current) controlsRef.current.enabled = false;
             isDraggingRef.current = true;
-
-            // Guardar el elemento seleccionado
             selectedItemRef.current = intersects[0].object;
 
-            // Resaltar el elemento seleccionado
             const material = selectedItemRef.current.material;
-            material.color = new THREE.Color(0x4caf50);
+            if (material && material.color) material.color = new THREE.Color(0x4caf50);
 
-            // Detener cualquier rotación automática
             rotationSpeedRef.current = 0;
             targetRotationRef.current = 0;
 
-            // Prevenir comportamiento por defecto
             event.preventDefault();
         } else {
-            // Si no se seleccionó ningún elemento, iniciar rotación de la escena
+            // Arrastre para girar el grupo completo
             isDraggingRef.current = true;
             selectedItemRef.current = null;
-            mouseRef.current.startX = event.clientX;
+            mouseRef.current.startY = event.clientY;
         }
     };
 
-    // Manejar movimiento durante arrastre
     const handleMouseMove = (event) => {
-        if (!isDraggingRef.current || !containerRef.current) return;
+        if (!isDraggingRef.current) return;
+
+        const circleGroup = itemsRef.current.circleGroup;
+        if (!circleGroup) return;
 
         if (selectedItemRef.current) {
-            // Mover el elemento seleccionado en la circunferencia
-            const rect = containerRef.current.getBoundingClientRect();
-
-            mouseRef.current.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-
-            // Calcular nueva posición en la circunferencia basada en el movimiento del mouse
-            const circleGroup = itemsRef.current.circleGroup;
-            if (circleGroup) {
-                // Calcular el ángulo de rotación basado en el movimiento vertical
-                const deltaY = event.movementY * 0.001;
-                circleGroup.rotation.x += deltaY;
-
-                // Asegurar que todos los textos mantengan su orientación frontal
-                itemsRef.current.forEach(item => {
-                    if (item.rotation) {
-                        item.rotation.x = 0; // Mantener siempre de frente
-                    }
-                });
-
-                // Actualizar velocidad de rotación
-                rotationSpeedRef.current = deltaY;
-            }
+            // Girar el grupo con el elemento seleccionado (arrastre vertical)
+            const deltaY = event.movementY * 0.001;
+            circleGroup.rotation.x += deltaY;
+            rotationSpeedRef.current = deltaY;
         } else {
-            // Si no se seleccionó ningún elemento, rotar la escena
-            const deltaY = event.movementY * 0.01;
-            sceneRef.current.rotation.x += deltaY;
+            // Girar el grupo (no toda la escena) cuando no hay selección
+            const deltaY = event.movementY * 0.005;
+            circleGroup.rotation.x += deltaY;
         }
     };
 
-    // Manejar fin de arrastre
     const handleMouseUp = () => {
-        // Restaurar controles de órbita
-        if (controlsRef.current) {
-            controlsRef.current.enabled = true;
-        }
+        if (controlsRef.current) controlsRef.current.enabled = true;
 
-        // Si había un elemento seleccionado, quitar resaltado
         if (selectedItemRef.current) {
             const material = selectedItemRef.current.material;
-            material.color = new THREE.Color(0x1b5e20);
+            if (material && material.color) material.color = new THREE.Color(0x1b5e20);
             selectedItemRef.current = null;
         }
 
-        // Marcar como no arrastrando
         isDraggingRef.current = false;
     };
 
