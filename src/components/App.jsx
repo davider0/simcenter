@@ -94,7 +94,7 @@ function App() {
 
           </h1>
         </div>
-        <Large3DList items={['00', '05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55']} />
+        <Large3DList items={Array.from({length: 59}, (_,i)=> i+1).map((n)=>n.toString())} />
 
 
 
