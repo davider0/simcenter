@@ -96,6 +96,7 @@ const Large3DList = ({ items: initialItems }) => {
         renderer.domElement.addEventListener('mousedown', handleMouseDown);
         renderer.domElement.addEventListener('mousemove', handleMouseMove);
         renderer.domElement.addEventListener('mouseup', handleMouseUp);
+        renderer.domElement.addEventListener('getItemDistance', handleItemDistance);
 
         return () => {
             window.removeEventListener('resize', handleResize);
@@ -124,6 +125,10 @@ const Large3DList = ({ items: initialItems }) => {
         createItemsInCircle();
     }, [initialItems]);
 
+
+
+
+
     // Crear elementos en circunferencia
     const createItemsInCircle = () => {
         if (!sceneRef.current) return;
@@ -136,7 +141,7 @@ const Large3DList = ({ items: initialItems }) => {
         scene.add(circleGroup);
 
         items.forEach((item, index) => {
-            const angle = (index / itemCount) * Math.PI * 2;
+            const angle = (index / itemCount) * Math.PI;
             const y = radius * Math.sin(angle);
             const z = radius * Math.cos(angle);
 
@@ -265,6 +270,27 @@ const Large3DList = ({ items: initialItems }) => {
 
         isDraggingRef.current = false;
     };
+
+    const handleItemDistance = () => {
+        if (!cameraRef.current) return [];
+
+        const camera = cameraRef.current;
+
+        return itemsRef.current.map((mesh) => {
+            const worldPos = new THREE.Vector3();
+            mesh.getWorldPosition(worldPos);
+
+            const distance = worldPos.distanceTo(camera.position);
+
+            return {
+                index: mesh.userData.index,
+                value: mesh.userData.value,
+                distance,
+                worldPos
+            };
+        }).sort((a, b) => a.distance - b.distance); // ordenados de cerca a lejos
+    };
+
 
     return (
         <div

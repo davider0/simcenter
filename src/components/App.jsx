@@ -4,6 +4,8 @@ import '../assets/fonts/ArialPixel.css';
 import '../assets/fonts/SpaceMono.css';
 import { useFetchStore } from '../zustand/fetchToAPI';
 import Large3DList from './Large3DList';
+import NonEuclidean from './NonEuclidean';
+import RainbowShader from './RainbowShader';
 /*
 var orderDefault = [{
   "creationTime": "2019-08-24T14:15:22Z",
@@ -95,8 +97,14 @@ function App() {
           </h1>
         </div>
         <Large3DList items={['00', '05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55']} />
-
-
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+          <div>
+            <RainbowShader />
+          </div>
+          <div>
+            <NonEuclidean />
+          </div>
+        </div>
 
       </header>
     </div>
