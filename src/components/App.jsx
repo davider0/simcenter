@@ -96,15 +96,9 @@ function App() {
 
           </h1>
         </div>
-        <Large3DList items={['00', '05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55']} />
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-          <div>
-            <RainbowShader />
-          </div>
-          <div>
-            <NonEuclidean />
-          </div>
-        </div>
+        <Large3DList items={Array.from({length: 59}, (_,i)=> i+1).map((n)=>n.toString())} />
+
+
 
       </header>
     </div>
